@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<AudioPreferences xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <MasterVolume>-6.261048</MasterVolume>
+  <MusicVolume>-9.81224</MusicVolume>
+  <SFXMasterVolume>-16.44085</SFXMasterVolume>
+</AudioPreferences>
