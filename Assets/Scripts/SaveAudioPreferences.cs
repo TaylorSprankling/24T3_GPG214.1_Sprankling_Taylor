@@ -52,16 +52,17 @@ public class SaveAudioPreferences : MonoBehaviour
     {
         CheckForFile();
         XmlDocument xmlDocument = new XmlDocument();
-        xmlDocument.Load(filePath);
-        XmlNode xmlNode = xmlDocument.SelectSingleNode("/AudioPreferences/" + mixerSliderLink.mixerParameter);
+        xmlDocument.Load(filePath); // Load the saved audio settings data to prevent overwriting other nodes
+        XmlNode xmlNode = xmlDocument.SelectSingleNode("/AudioPreferences/" + mixerSliderLink.mixerParameter); // Select the appropriate node
         if (xmlNode == null)
         {
+            // Create node if it doesn't exist
             Debug.Log("Creating " + mixerSliderLink.mixerParameter + " XML node as it does not currently exist");
             XmlNode newXmlNode = xmlDocument.CreateElement(mixerSliderLink.mixerParameter);
             xmlDocument.DocumentElement.AppendChild(newXmlNode);
-            xmlNode = xmlDocument.SelectSingleNode("/AudioPreferences/" + mixerSliderLink.mixerParameter);
+            xmlNode = xmlDocument.SelectSingleNode("/AudioPreferences/" + mixerSliderLink.mixerParameter); // Select created node
         }
-        xmlNode.InnerText = (mixerSliderLink.minAttenuation + value * (mixerSliderLink.maxAttenuation - mixerSliderLink.minAttenuation)).ToString();
-        xmlDocument.Save(filePath);
+        xmlNode.InnerText = (mixerSliderLink.minAttenuation + value * (mixerSliderLink.maxAttenuation - mixerSliderLink.minAttenuation)).ToString(); // Change node value accordingly
+        xmlDocument.Save(filePath); // Save altered audio settings file
     }
 }

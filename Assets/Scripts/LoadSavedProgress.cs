@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class LoadSavedProgress : MonoBehaviour
 {
@@ -36,10 +35,11 @@ public class LoadSavedProgress : MonoBehaviour
     {
         if (CheckForFile())
         {
-            string gameSaveString = File.ReadAllText(filePath);
-            PlayerSaveData gameSave = JsonUtility.FromJson<PlayerSaveData>(gameSaveString);
+            string gameSaveString = File.ReadAllText(filePath); // Save file text to string
+            PlayerSaveData gameSave = JsonUtility.FromJson<PlayerSaveData>(gameSaveString); // Convert json string to game save data
             if (gameSave != null)
             {
+                // Change transition variables according to save data so that game starts from the zone the player left off with same items & health
                 transitionPoint.newSceneName = gameSave.zone;
                 transitionPoint.transitioningGameObject = transitionLoadObject;
                 transitionLoadObject.GetComponent<Damageable>().SetHealth(gameSave.health);

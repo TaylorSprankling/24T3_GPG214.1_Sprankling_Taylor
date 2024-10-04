@@ -36,6 +36,7 @@ public class AudioPreferencesLoader : MonoBehaviour
 
     private void CreateVolumePreferences()
     {
+        // Create audio preferences file with the default max values set on the audio mixer (if no audio prefernces exist)
         AudioPreferences audioPreferences = new AudioPreferences();
         audioMixer.GetFloat(masterAudioGroupParameter, out float masterVol);
         audioPreferences.MasterVolume = masterVol;
@@ -56,6 +57,7 @@ public class AudioPreferencesLoader : MonoBehaviour
         {
             if (File.Exists(filePath))
             {
+                // If audio preferences file does exist, load the data and set mixer values accordingly
                 AudioPreferences audioPreferences = new AudioPreferences();
                 XmlSerializer serializer = new XmlSerializer(typeof(AudioPreferences));
                 using (StreamReader reader = new StreamReader(filePath))

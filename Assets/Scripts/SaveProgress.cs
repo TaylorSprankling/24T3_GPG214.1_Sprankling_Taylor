@@ -29,16 +29,16 @@ public class SaveProgress : MonoBehaviour
     public void SaveCurrentProgress()
     {
         CheckForFolder();
-        GameObject player = FindObjectOfType<PlayerCharacter>().gameObject;
-        InventoryController playerInventory = player.GetComponent<InventoryController>();
-        PlayerSaveData savedData = new PlayerSaveData();
-        savedData.zone = SceneManager.GetActiveScene().name;
-        savedData.health = player.GetComponent<Damageable>().CurrentHealth;
-        savedData.key1 = playerInventory.HasItem("Key1");
+        GameObject player = FindObjectOfType<PlayerCharacter>().gameObject; // Get the player character
+        InventoryController playerInventory = player.GetComponent<InventoryController>(); // Get the player inventory
+        PlayerSaveData savedData = new PlayerSaveData(); // The pieces of data to save
+        savedData.zone = SceneManager.GetActiveScene().name; // The current scene
+        savedData.health = player.GetComponent<Damageable>().CurrentHealth; // The player's current health
+        savedData.key1 = playerInventory.HasItem("Key1"); // Keys 1-3
         savedData.key2 = playerInventory.HasItem("Key2");
         savedData.key3 = playerInventory.HasItem("Key3");
-        savedData.weapons = playerInventory.HasItem("Staff");
-        string saveDataString = JsonUtility.ToJson(savedData);
-        File.WriteAllText(filePath, saveDataString);
+        savedData.weapons = playerInventory.HasItem("Staff"); // The weapon
+        string saveDataString = JsonUtility.ToJson(savedData); // Convert to json string
+        File.WriteAllText(filePath, saveDataString); // Save to file
     }
 }
